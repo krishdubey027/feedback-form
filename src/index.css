@@ -1,0 +1,360 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #F0FAF9;
+  overflow-x: hidden;
+}
+
+/* ─── Brand variables ───────────────────────────────────────────────── */
+:root {
+  --teal:       #0E9E8E;
+  --teal-dark:  #0A8578;
+  --teal-light: #E6F7F5;
+  --text:       #1A2B3C;
+  --subtext:    #6B7280;
+  --border:     #E5E7EB;
+  --error:      #EF4444;
+}
+
+/* ─── Animations ────────────────────────────────────────────────────── */
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeScaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.step-enter     { animation: stepIn 200ms ease forwards; }
+.thankyou-enter { animation: fadeScaleIn 280ms ease forwards; }
+
+/* ─── Progress bar ──────────────────────────────────────────────────── */
+.progress-fill { transition: width 250ms ease; }
+
+/* ─── Form inputs ───────────────────────────────────────────────────── */
+.field-input {
+  display: block;
+  width: 100%;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: border-color 150ms, box-shadow 150ms;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field-input::placeholder { color: #9CA3AF; }
+.field-input:hover:not(:focus) { border-color: rgba(14, 158, 142, 0.4); }
+.field-input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(14, 158, 142, 0.18);
+}
+.field-input.has-icon { padding-left: 40px; }
+.field-input.field-error { border-color: var(--error); }
+.field-input.field-error:focus { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15); }
+
+/* ─── Textarea ──────────────────────────────────────────────────────── */
+.field-textarea {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: inherit;
+  color: var(--text);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: border-color 150ms, box-shadow 150ms;
+  outline: none;
+  resize: vertical;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field-textarea::placeholder { color: #9CA3AF; }
+.field-textarea:hover:not(:focus) { border-color: rgba(14, 158, 142, 0.4); }
+.field-textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(14, 158, 142, 0.18);
+}
+.field-textarea.field-error { border-color: var(--error); }
+
+/* ─── Star button ───────────────────────────────────────────────────── */
+.star-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  line-height: 1;
+  min-width: 36px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: transform 110ms ease;
+}
+.star-btn:hover { transform: scale(1.18); }
+.star-btn:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* ─── Back button ───────────────────────────────────────────────────── */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--subtext);
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  transition: background 150ms;
+  line-height: 1;
+  white-space: nowrap;
+}
+.btn-back:hover  { background: #F9FAFB; }
+.btn-back:active { transform: scale(0.98); }
+.btn-back:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
+
+/* ─── react-phone-input-2 overrides ────────────────────────────────── */
+
+/* Root wrapper */
+.phone-field-root { display: flex; flex-direction: column; }
+
+.phone-field-root .react-tel-input {
+  font-family: inherit;
+}
+
+/* ── Phone number text input ── */
+.phone-field-root .react-tel-input .form-control {
+  width: 100% !important;
+  height: 44px !important;
+  padding-left: 80px !important;
+  border: 1.5px solid #E5E7EB !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  color: #1A2B3C !important;
+  background: #fff !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06) !important;
+  transition: border-color 150ms, box-shadow 150ms !important;
+  outline: none !important;
+  line-height: normal !important;
+}
+.phone-field-root .react-tel-input .form-control::placeholder {
+  color: #9CA3AF !important;
+}
+.phone-field-root .react-tel-input .form-control:hover:not(:focus) {
+  border-color: rgba(14,158,142,0.45) !important;
+}
+.phone-field-root .react-tel-input .form-control:focus {
+  border-color: #0E9E8E !important;
+  box-shadow: 0 0 0 3px rgba(14,158,142,0.18) !important;
+}
+.phone-field-error .react-tel-input .form-control {
+  border-color: #EF4444 !important;
+}
+.phone-field-error .react-tel-input .form-control:focus {
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15) !important;
+}
+
+/* ── Flag dropdown button ── */
+.phone-field-root .react-tel-input .flag-dropdown {
+  border: 1.5px solid #E5E7EB !important;
+  border-right: 1px solid #E5E7EB !important;
+  border-radius: 10px 0 0 10px !important;
+  background: #FAFAFA !important;
+  height: 44px !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transition: background 150ms, border-color 150ms !important;
+}
+.phone-field-root .react-tel-input .flag-dropdown:hover {
+  background: #F3F4F6 !important;
+}
+.phone-field-root .react-tel-input .flag-dropdown.open {
+  background: #F3F4F6 !important;
+  border-radius: 10px 0 0 10px !important;
+  border-color: rgba(14,158,142,0.45) !important;
+}
+
+/* Selected flag display */
+.phone-field-root .react-tel-input .selected-flag {
+  height: 44px !important;
+  width: 72px !important;
+  padding: 0 8px 0 10px !important;
+  border-radius: 10px 0 0 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+.phone-field-root .react-tel-input .selected-flag .arrow {
+  border-top-color: #6B7280 !important;
+  margin-top: 0 !important;
+  position: static !important;
+  margin-left: 4px !important;
+}
+.phone-field-root .react-tel-input .selected-flag .arrow.up {
+  border-top: none !important;
+  border-bottom: 4px solid #6B7280 !important;
+}
+
+/* ── Country dropdown ── */
+.phone-field-root .react-tel-input .country-list {
+  border-radius: 12px !important;
+  border: 1px solid #E5E7EB !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13) !important;
+  background: #fff !important;
+  margin-top: 4px !important;
+  max-height: 240px !important;
+  width: 300px !important;
+  padding: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  animation: phoneDropIn 150ms ease forwards !important;
+}
+
+@keyframes phoneDropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar inside dropdown */
+.phone-field-root .react-tel-input .country-list::-webkit-scrollbar {
+  width: 4px !important;
+}
+.phone-field-root .react-tel-input .country-list::-webkit-scrollbar-thumb {
+  background: #D1D5DB !important;
+  border-radius: 2px !important;
+}
+
+/* ── Search box ── */
+.phone-field-root .react-tel-input .country-list .search {
+  padding: 8px 10px !important;
+  border-bottom: 1px solid #F3F4F6 !important;
+  background: #fff !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2 !important;
+  margin: 0 !important;
+}
+.phone-field-root .react-tel-input .country-list .search-emoji {
+  font-size: 13px !important;
+  padding: 0 !important;
+  position: absolute !important;
+  left: 18px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+}
+.phone-field-root .react-tel-input .country-list .search-box {
+  width: 100% !important;
+  height: 34px !important;
+  padding: 0 10px 0 28px !important;
+  border: 1.5px solid #E5E7EB !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  font-family: inherit !important;
+  color: #1A2B3C !important;
+  background: #F9FAFB !important;
+  outline: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  transition: border-color 150ms !important;
+}
+.phone-field-root .react-tel-input .country-list .search-box::placeholder {
+  color: #9CA3AF !important;
+}
+.phone-field-root .react-tel-input .country-list .search-box:focus {
+  border-color: #0E9E8E !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 2px rgba(14,158,142,0.15) !important;
+}
+
+/* ── Country items ── */
+.phone-field-root .react-tel-input .country-list .country {
+  padding: 8px 14px !important;
+  font-size: 13px !important;
+  font-family: inherit !important;
+  color: #1A2B3C !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: background 80ms !important;
+  line-height: 1.4 !important;
+}
+.phone-field-root .react-tel-input .country-list .country:hover {
+  background: #F0FAF9 !important;
+}
+.phone-field-root .react-tel-input .country-list .country.highlight {
+  background: #E6F7F5 !important;
+}
+.phone-field-root .react-tel-input .country-list .country .country-name {
+  font-size: 13px !important;
+  color: #1A2B3C !important;
+  flex: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.phone-field-root .react-tel-input .country-list .country .dial-code {
+  color: #9CA3AF !important;
+  font-size: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Preferred/divider */
+.phone-field-root .react-tel-input .country-list .divider {
+  border-top: 1px solid #F3F4F6 !important;
+  margin: 4px 0 !important;
+}
+
+/* No results */
+.phone-field-root .react-tel-input .country-list .no-entries-message {
+  padding: 16px !important;
+  text-align: center !important;
+  color: #9CA3AF !important;
+  font-size: 12px !important;
+}
+
+/* Mobile — prevent dropdown clipping on small screens */
+@media (max-width: 480px) {
+  .phone-field-root .react-tel-input .country-list {
+    width: calc(100vw - 32px) !important;
+    left: 0 !important;
+    right: auto !important;
+  }
+}
+

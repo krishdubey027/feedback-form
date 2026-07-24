@@ -46,14 +46,10 @@ function validateStep(step, data) {
     if (!data.email.trim())        err.email        = 'Email address is required.'
     else if (!EMAIL_RE.test(data.email.trim()))
                                    err.email        = 'Please enter a valid email address.'
-    // Phone is optional — only validate if something was entered beyond the dial code
+    // Phone is optional — only validate if digits were entered
     if (data.phone) {
-      const dialLen    = (data.phoneMeta?.dialCode || '').length
-      const hasDigits  = data.phone.replace(/\D/g, '').length > dialLen
-      if (hasDigits) {
-        const phoneErr = validatePhone(data.phone, data.phoneMeta?.countryData)
-        if (phoneErr) err.phone = phoneErr
-      }
+      const phoneErr = validatePhone(data.phone, data.phoneMeta?.country)
+      if (phoneErr) err.phone = phoneErr
     }
   }
 

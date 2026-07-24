@@ -1,37 +1,21 @@
 /**
- * Phone validation utility.
- * Used by FeedbackForm.jsx to validate the phone number before advancing Step 1.
+ * Validates a phone number against the selected country's digit rules.
  *
- * @param {string} value        - Full value from react-phone-input-2 (includes dial code)
- * @param {object} countryData  - Country object from react-phone-input-2 onChange callback
- * @returns {string}            - '' if valid, error message if invalid
+ * @param {string} digits      - Raw digits only (no dial code prefix)
+ * @param {object} countryObj  - Country from PhoneInputField { code, name, dial, min, max }
+ * @returns {string}           - '' if valid, error string if invalid
  */
-export function validatePhone(value, countryData) {
-  if (!value) return ''
+export function validatePhone(digits, countryObj) {
+  // Optional field — empty is always OK
+  if (!digits || digits.length === 0) return ''
 
-  const dialCode    = countryData?.dialCode || ''
-  const national    = value.slice(dialCode.length).replace(/\D/g, '')
+  const { name = 'Phone number', min = 5, max = 15 } = countryObj || {}
 
-  // Nothing typed beyond the dial code — optional field, OK to continue
-  if (!national || national.length === 0) return ''
-
-  // Derive expected length from the library's format mask ("." = one digit)
-  const format          = countryData?.format || ''
-  const dotCount        = (format.match(/\./g) || []).length
-  const dialDigits      = dialCode.replace(/\D/g, '').length
-  const expectedNational = dotCount - dialDigits
-
-  if (expectedNational > 0) {
-    if (national.length < expectedNational) {
-      return `${countryData?.name || 'Phone number'} requires ${expectedNational} digits — ${national.length} entered.`
-    }
-    if (national.length > expectedNational) {
-      return `Too many digits for ${countryData?.name || 'this country'} (+${dialCode}).`
-    }
-  } else {
-    // Fallback: ITU range 5–15 digits for unknown formats
-    if (national.length < 5)  return 'Phone number is too short.'
-    if (national.length > 15) return 'Phone number is too long.'
+  if (digits.length < min) {
+    return `${name} requires ${min === max ? min : `${min}–${max}`} digits — ${digits.length} entered.`
+  }
+  if (digits.length > max) {
+    return `Too many digits for ${name} — max ${max}.`
   }
   return ''
 }

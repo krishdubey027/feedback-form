@@ -326,7 +326,6 @@ export default function PhoneInputField({ value, onChange, error, id = 'phone' }
           aria-label={`Country: ${country.name}, +${country.dial}`}
           onClick={() => setOpen(v => !v)}
           className="ohc-trigger">
-          <span className="ohc-trigger-flag">{country.flag}</span>
           <span className="ohc-trigger-iso">{country.code}</span>
           <span className="ohc-trigger-dial">+{country.dial}</span>
           <svg viewBox="0 0 24 24" fill="none" aria-hidden

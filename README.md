@@ -52,7 +52,7 @@ https://ohctech-feedback.vercel.app
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/krishdubey027/feedback-form.git
 ```
 
 Go to the project directory:
